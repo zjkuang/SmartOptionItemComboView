@@ -90,19 +90,6 @@ public class SmartOptionItemComboView: UIView {
                     optionIconLabel.text = "⦾"
                 }
             }
-            
-            if let delegate = delegate {
-                delegate.didClick(smartOptionItemComboView: self)
-            }
-            else {
-                let siblings = getSiblings()
-                for sibling in siblings {
-                    if let delegate = sibling.delegate {
-                        delegate.didClick(smartOptionItemComboView: self)
-                        break
-                    }
-                }
-            }
         }
     }
     
@@ -149,6 +136,17 @@ public class SmartOptionItemComboView: UIView {
         if gestureRecognizer is UITapGestureRecognizer {
             if gestureRecognizer.view == optionIconLabel {
                 checked = !checked
+                if let delegate = delegate {
+                    delegate.didClick(smartOptionItemComboView: self)
+                }
+                else {
+                    let siblings = getSiblings()
+                    for sibling in siblings {
+                        if let delegate = sibling.delegate {
+                            delegate.didClick(smartOptionItemComboView: self)
+                        }
+                    }
+                }
             }
         }
     }

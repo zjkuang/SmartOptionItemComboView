@@ -178,6 +178,7 @@ class SandwichOrderViewController: UIViewController, SmartOptionItemComboViewDel
     
     func didClick(smartOptionItemComboView: SmartOptionItemComboView) {
         let selections = smartOptionItemComboView.selections()
+        print("Group \(smartOptionItemComboView.group) selections: \(selections)")
         var selection = ""
         if selections.count > 0 {
             selection = selections[0]

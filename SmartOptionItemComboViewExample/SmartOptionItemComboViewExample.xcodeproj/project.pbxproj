@@ -59,9 +59,9 @@
 		6E154CCA224EA7E70050BFF9 /* SmartOptionItemComboView */ = {
 			isa = PBXGroup;
 			children = (
-				6E154CCB224EA7E70050BFF9 /* SmartOptionItemComboView.xib */,
 				6E154CCC224EA7E70050BFF9 /* Extensions.swift */,
 				6E154CCD224EA7E70050BFF9 /* SmartOptionItemComboView.swift */,
+				6E154CCB224EA7E70050BFF9 /* SmartOptionItemComboView.xib */,
 			);
 			path = SmartOptionItemComboView;
 			sourceTree = "<group>";
