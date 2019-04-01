@@ -28,3 +28,6 @@ How to use
 
 # Example
 See SmartOptionItemComboViewExample in this repository.
+
+# Effect
+![LoginScreenshot](https://github.com/zjkuang/SmartOptionItemComboView/blob/master/SmartOptionItemComboViewExample/SmartOptionItemComboViewExample/example.gif)
