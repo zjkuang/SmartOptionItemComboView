@@ -36,6 +36,13 @@ public class SmartOptionItemComboView: UIView {
         case checkbox, bullet
     }
     
+    private enum IconUnicode: String { // "☑"; "⦿", "⦾", "•", "◦"
+        case unselectedCheckbox = ""
+        case selectedCheckbox = "☑"
+        case unselectedBullet = "⦾"
+        case selectedBullet = "⦿"
+    }
+    
     private var style: Style = .checkbox {
         didSet {
             if style == .checkbox {
@@ -48,7 +55,7 @@ public class SmartOptionItemComboView: UIView {
             }
             else if style == .bullet {
                 optionIconLabel.setBorder(width: 0, color: UIColor.clear, radius: 0)
-                optionIconLabel.text = checked ? "⦿" : "⦾"
+                optionIconLabel.text = checked ? IconUnicode.selectedBullet.rawValue : IconUnicode.unselectedBullet.rawValue
             }
         }
     }
@@ -67,10 +74,10 @@ public class SmartOptionItemComboView: UIView {
             if checked {
                 if style == .checkbox {
                     optionIconLabel.setBorder(width: 0, color: UIColor.clear, radius: 0)
-                    optionIconLabel.text = "☑"
+                    optionIconLabel.text = IconUnicode.selectedCheckbox.rawValue
                 }
                 else if style == .bullet {
-                    optionIconLabel.text = "⦿"
+                    optionIconLabel.text = IconUnicode.selectedBullet.rawValue
                     let siblings = getSiblings()
                     for sibling in siblings {
                         if sibling.checked {
@@ -84,10 +91,10 @@ public class SmartOptionItemComboView: UIView {
             else {
                 if style == .checkbox {
                     optionIconLabel.setBorder(width: 1, color: UIColor.black, radius: 0)
-                    optionIconLabel.text = ""
+                    optionIconLabel.text = IconUnicode.unselectedCheckbox.rawValue
                 }
                 else if style == .bullet {
-                    optionIconLabel.text = "⦾"
+                    optionIconLabel.text = IconUnicode.unselectedBullet.rawValue
                 }
             }
         }
@@ -120,7 +127,7 @@ public class SmartOptionItemComboView: UIView {
             optionIconLabel.setBorder(width: 1, color: UIColor.black, radius: 0)
         }
         else if style == .bullet {
-            optionIconLabel.text = "⦾"
+            optionIconLabel.text = IconUnicode.unselectedBullet.rawValue
         }
         
         var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didRecognizeGesture(gestureRecognizer:)))
@@ -134,7 +141,7 @@ public class SmartOptionItemComboView: UIView {
     
     @IBAction func didRecognizeGesture(gestureRecognizer: UIGestureRecognizer) {
         if gestureRecognizer is UITapGestureRecognizer {
-            if gestureRecognizer.view == optionIconLabel {
+            if (gestureRecognizer.view == optionIconLabel) || (gestureRecognizer.view == titleLabel) {
                 checked = !checked
                 if let delegate = delegate {
                     delegate.didClick(smartOptionItemComboView: self)
