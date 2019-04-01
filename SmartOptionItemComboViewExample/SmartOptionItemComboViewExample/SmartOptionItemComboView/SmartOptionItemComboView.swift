@@ -163,18 +163,18 @@ public class SmartOptionItemComboView: UIView {
         return siblings
     }
     
-    public func setGroup(name: String, andAllSiblings: Bool = false) {
+    public func setGroup(name: String, andAllSiblings: Bool = true) {
         group = name
         
         if andAllSiblings {
             let siblings = getSiblings()
             for sibling in siblings {
-                sibling.setGroup(name: name)
+                sibling.setGroup(name: name, andAllSiblings: false)
             }
         }
     }
     
-    public func setStyle(multiSelection: Bool, andAllSiblings: Bool = false) {
+    public func setStyle(multiSelection: Bool, andAllSiblings: Bool = true) {
         if multiSelection {
             style = .checkbox
         }
@@ -185,12 +185,12 @@ public class SmartOptionItemComboView: UIView {
         if andAllSiblings {
             let siblings = getSiblings()
             for sibling in siblings {
-                sibling.setStyle(multiSelection: multiSelection)
+                sibling.setStyle(multiSelection: multiSelection, andAllSiblings: false)
             }
         }
     }
     
-    public func setOptionIcon(atRightSide: Bool, andAllSiblings: Bool = false) {
+    public func setOptionIcon(atRightSide: Bool, andAllSiblings: Bool = true) {
         if atRightSide {
             alLeftOptionIconLabelLeading.priority = UILayoutPriority(rawValue: 250)
             alRightTitleLabelLeading.priority = UILayoutPriority(rawValue: 250)
@@ -211,40 +211,40 @@ public class SmartOptionItemComboView: UIView {
         if andAllSiblings {
             let siblings = getSiblings()
             for sibling in siblings {
-                sibling.setOptionIcon(atRightSide: atRightSide)
+                sibling.setOptionIcon(atRightSide: atRightSide, andAllSiblings: false)
             }
         }
     }
     
-    public func setTextAlign(toRight: Bool, andAllSiblings: Bool = false) {
+    public func setTextAlign(toRight: Bool, andAllSiblings: Bool = true) {
         titleLabel.textAlignment = toRight ? .right : .left
         
         if andAllSiblings {
             let siblings = getSiblings()
             for sibling in siblings {
-                sibling.setTextAlign(toRight: toRight)
+                sibling.setTextAlign(toRight: toRight, andAllSiblings: false)
             }
         }
     }
     
-    public func setText(color: UIColor, andAllSiblings: Bool = false) {
+    public func setText(color: UIColor, andAllSiblings: Bool = true) {
         titleLabel.textColor = color
         
         if andAllSiblings {
             let siblings = getSiblings()
             for sibling in siblings {
-                sibling.setText(color: color)
+                sibling.setText(color: color, andAllSiblings: false)
             }
         }
     }
     
-    public func setFont(size: CGFloat, andAllSiblings: Bool = false) {
+    public func setFont(size: CGFloat, andAllSiblings: Bool = true) {
         titleLabel.font = titleLabel.font.withSize(size)
         
         if andAllSiblings {
             let siblings = getSiblings()
             for sibling in siblings {
-                sibling.setFont(size: size)
+                sibling.setFont(size: size, andAllSiblings: false)
             }
         }
     }

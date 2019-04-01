@@ -10,6 +10,9 @@ import UIKit
 
 class SandwichOrderViewController: UIViewController, SmartOptionItemComboViewDelegate {
 
+    // We provide 6 groups of options (bread, meat, veggies, cheese, sauce, and size) for our customers to make choice on their sandwiches. To organize the layout,
+    // (1) For each group, add a UIView as the group container view. Here we have breadOptionsView, meatOptionsView, veggiesOptionsView, cheeseOptionsView, sauceOptionsView, and sizeOptionsView.
+    // (2) In each group container view, add UIViews (as subview) and set the Custom Class as SmartOptionItemComboView. Here, for example, in breadOptionsView we have subviews of whiteBreadOptionItemComboView, wholeGrainBreadOptionItemComboView, garlicBreadOptionItemComboView
     @IBOutlet weak var baseView: UIView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var orderSummaryView: UIView!
@@ -65,6 +68,7 @@ class SandwichOrderViewController: UIViewController, SmartOptionItemComboViewDel
     }
     
     func prepareView() {
+        // Add a border for each group view
         orderSummaryTextView.setBorder(width: 1, color: UIColor.gray, radius: 6)
         breadOptionsView.setBorder(width: 1, color: UIColor.gray, radius: 6)
         meatOptionsView.setBorder(width: 1, color: UIColor.gray, radius: 6)
@@ -73,60 +77,56 @@ class SandwichOrderViewController: UIViewController, SmartOptionItemComboViewDel
         sauceOptionsView.setBorder(width: 1, color: UIColor.gray, radius: 6)
         sizeOptionsView.setBorder(width: 1, color: UIColor.gray, radius: 6)
         
+        // Set title text for each option item's combo view
         whiteBreadOptionItemComboView.title = "White Bread"
         wholeGrainBreadOptionItemComboView.title = "Whole Grain"
         garlicBreadOptionItemComboView.title = "Garlic Bread"
+        // Set delegate for ANY ONE OF the option item's combo view. Note that being named SmartOptionItemComboView, for those whose delegate not set, they are smart enough to find out the delegate from their sibling
         whiteBreadOptionItemComboView.delegate = self
-        whiteBreadOptionItemComboView.setGroup(name: "Bread", andAllSiblings: true)
-        whiteBreadOptionItemComboView.setStyle(multiSelection: false, andAllSiblings: true)
-        // whiteBreadOptionItemComboView.setOptionIcon(atRightSide: true, andAllSiblings: true)
-        // whiteBreadOptionItemComboView.setTextAlign(toRight: true, andAllSiblings: true)
+        // Set the group name, style, icon position, text alignment, text color, font for ANY ONE OF the option item's combo view. Note that being named SmartOptionItemComboView, settings of these properties on any one sibling will take effect on all the other siblings in the same group.
+        whiteBreadOptionItemComboView.setGroup(name: "Bread")
+        whiteBreadOptionItemComboView.setStyle(multiSelection: false)
+        // whiteBreadOptionItemComboView.setOptionIcon(atRightSide: true)
+        // whiteBreadOptionItemComboView.setTextAlign(toRight: true)
+        // whiteBreadOptionItemComboView.setText(color: UIColor.orange)
+        // whiteBreadOptionItemComboView.setFont(size: 15)
+        // We don't need to set the group-wide properties (delegate, group name, style, icon position, text alignment, text color, font) for each smartOptionItemComboView. All the other siblings in the same group will automatically acquire the group-wide properties from their sibling that has the information.
         
         beefOptionItemComboView.title = "Beef"
         lambOptionItemComboView.title = "Lamb"
         chickenOptionItemComboView.title = "Chicken"
         turkeyOptionItemComboView.title = "Turkey"
         beefOptionItemComboView.delegate = self
-        beefOptionItemComboView.setGroup(name: "Meat", andAllSiblings: true)
-        beefOptionItemComboView.setStyle(multiSelection: false, andAllSiblings: true)
-        // beefOptionItemComboView.setOptionIcon(atRightSide: true, andAllSiblings: true)
-        // beefOptionItemComboView.setTextAlign(toRight: true, andAllSiblings: true)
+        beefOptionItemComboView.setGroup(name: "Meat")
+        beefOptionItemComboView.setStyle(multiSelection: false)
         
         spinachOptionItemComboView.title = "Spinach"
         tomatoOptionItemComboView.title = "Tomato"
         sweetPepperOptionItemComboView.title = "Sweet Pepper"
         cucumberOptionItemComboView.title = "Cucumber"
         spinachOptionItemComboView.delegate = self
-        spinachOptionItemComboView.setGroup(name: "Veggies", andAllSiblings: true)
-        // spinachOptionItemComboView.setStyle(multiSelection: false, andAllSiblings: true)
-        // spinachOptionItemComboView.setOptionIcon(atRightSide: true, andAllSiblings: true)
-        // spinachOptionItemComboView.setTextAlign(toRight: true, andAllSiblings: true)
+        spinachOptionItemComboView.setGroup(name: "Veggies")
+        // spinachOptionItemComboView.setStyle(multiSelection: true) // true by default so no need to set it.
         
         swissOptionItemComboView.title = "Swiss Cheese"
         cheddarOptionItemComboView.title = "Cheddar"
         pepperjackOptionItemComboView.title = "Pepperjack"
         swissOptionItemComboView.delegate = self
-        swissOptionItemComboView.setGroup(name: "Cheese", andAllSiblings: true)
-        swissOptionItemComboView.setStyle(multiSelection: false, andAllSiblings: true)
-        // swissOptionItemComboView.setOptionIcon(atRightSide: true, andAllSiblings: true)
-        // swissOptionItemComboView.setTextAlign(toRight: true, andAllSiblings: true)
+        swissOptionItemComboView.setGroup(name: "Cheese")
+        swissOptionItemComboView.setStyle(multiSelection: false)
         
         ketchupOptionItemComboView.title = "Ketchup"
         mustardOptionItemComboView.title = "Mustard"
         spicyOptionItemComboView.title = "Spicy"
         ketchupOptionItemComboView.delegate = self
-        ketchupOptionItemComboView.setGroup(name: "Sauce", andAllSiblings: true)
-        ketchupOptionItemComboView.setStyle(multiSelection: false, andAllSiblings: true)
-        // ketchupOptionItemComboView.setOptionIcon(atRightSide: true, andAllSiblings: true)
-        // ketchupOptionItemComboView.setTextAlign(toRight: true, andAllSiblings: true)
+        ketchupOptionItemComboView.setGroup(name: "Sauce")
+        ketchupOptionItemComboView.setStyle(multiSelection: false)
         
         footLongOptionItemComboView.title = "Foot Long"
         sixInchesOptionItemComboView.title = "6\""
         footLongOptionItemComboView.delegate = self
-        footLongOptionItemComboView.setGroup(name: "Size", andAllSiblings: true)
-        footLongOptionItemComboView.setStyle(multiSelection: false, andAllSiblings: true)
-        // footLongOptionItemComboView.setOptionIcon(atRightSide: true, andAllSiblings: true)
-        // footLongOptionItemComboView.setTextAlign(toRight: true, andAllSiblings: true)
+        footLongOptionItemComboView.setGroup(name: "Size")
+        footLongOptionItemComboView.setStyle(multiSelection: false)
     }
     
     func updateOrderSummary() {
